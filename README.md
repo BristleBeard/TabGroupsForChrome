@@ -8,4 +8,4 @@ http://www.iconarchive.com/show/fs-icons-by-franksouza183/Places-folder-green-ic
 
 jQuery use the MIT license.
 
-The other ressources are created by me and are in the public domain.
+The other resources are licensed under the GNU General Public License v3.
