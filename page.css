@@ -1,11 +1,8 @@
 body
 {
   background-color:#3876b6;
-  /*background-color:#F98C00;*/
-  background-image:url("img/bg.png");
-  background-repeat:repeat-y;
-  background-attachment:fixed;
-  background-position:center top;
+  background: -webkit-linear-gradient(left, #376bb0 0%, #1a96cc 50%, #376bb0 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, #376bb0 0%, #1a96cc 50%, #376bb0 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   margin:0;
   padding:0;
 }
@@ -14,8 +11,7 @@ header
 {
   background-color:white;
   margin:0;
-  margin-top:10px;
-  padding:12px;
+  padding:15px;
   border-bottom:5px solid #d5d5d5;
 }
 
