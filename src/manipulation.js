@@ -18,8 +18,8 @@ function createGroup()
     '<div id="group_id_' + new_group.id.toString() + '" class="group_id" >' +
       '<p class="group_head">' +
 	'<input type="text" class="group_name" value="' + new_group.name + '" >' +
-	'<button type="button" class="group_remove" >Close the group</button>' +
-	'<button type="button" class="group_set_actif" >Work with this group</button>' +
+	'<button type="button" class="group_set_actif" >Open Tab Group</button>' +
+	'<button type="button" class="group_remove" title="Close Group">X</button>' +
 	'<button type="button" class="group_move" draggable="true" >M</button>' +
       '</p>' +
       '<ul class="list_onglet">' +

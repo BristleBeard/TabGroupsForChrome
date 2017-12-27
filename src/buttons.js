@@ -7,6 +7,11 @@ $( document ).ready(function() {
   });
 
   $("#list_groups").on( "click", ".group_remove", function() {
+    if( ! confirm('Close this tab group?'))
+    {
+      return;
+    }
+
     var group = getGroup(getGroupId($(this)));
 
     if(group.id == groupActif.id)
@@ -15,16 +20,16 @@ $( document ).ready(function() {
       var next_group = list_groups[0];// On prend le premier groupe que l'on trouve
       if(next_group.id == groupActif.id)// Si c'est le meme
       {
-	// Il existe un autre groupe
-	if(list_groups.length > 1)
-	{
-	  next_group = list_groups[1];
-	}
-	// Ou pas
-	else
-	{
-	  next_group = createGroup();
-	}
+        // Il existe un autre groupe
+        if(list_groups.length > 1)
+        {
+          next_group = list_groups[1];
+        }
+        // Ou pas
+        else
+        {
+          next_group = createGroup();
+        }
       }
 
       //ferme les onglets du groupe courant et ouvrent ceux du prochain
