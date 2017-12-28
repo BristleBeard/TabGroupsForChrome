@@ -5,7 +5,7 @@
 function createGroup()
 {
   // Creation du groupe
-  var new_group = new classGroupe();
+  var new_group = new classGroup();
 
   new_group.id = getNewId();
   new_group.name = "Group " + new_group.id.toString();
@@ -40,7 +40,7 @@ function addGroupTab(group, tab, onFirstLaunch)
   if(tab.url != chrome.extension.getURL('manager.html'))
   {
     // Rajout au groupe
-    tab.groupe_onglet = group.id;
+    tab.tab_group = group.id;
     group.list_tabs.push(tab);
 
     // Actualisation de l'affichage
@@ -52,9 +52,9 @@ function addGroupTab(group, tab, onFirstLaunch)
       elementOngletListe += '<button type="button" class="tabCloseButton" >-</button>';
     elementOngletListe += '</div>';
 
-    if(tab.icone)
+    if(tab.icon)
     {
-      elementOngletListe += '<img src="' + tab.icone + '" alt="" height="17px" /> ';
+      elementOngletListe += '<img src="' + tab.icon + '" alt="" height="17px" /> ';
     }
     if(tab.title)
     {
@@ -116,20 +116,20 @@ function removeTabGroup(id_tab)
 	if(groupActif.list_tabs.length == 0)
 	{
 	  // On creer un onglet a vide charger
-	  var empty_tab = new classOnglet();
+	  var empty_tab = new classTab();
 	  empty_tab.id = getNewIdTab();
 	  empty_tab.id_chrome = -1;
 	  empty_tab.url = "chrome://newtab/";
           empty_tab.pinned = false;
 	  empty_tab.title = "Nouvel onglet";
-	  empty_tab.icone = "";
-	  empty_tab.groupe_onglet = -1;
+	  empty_tab.icon = "";
+	  empty_tab.tab_group = -1;
 
 	  addGroupTab(groupActif, empty_tab);
 	}
       }
 
-      tab.groupe_onglet = -1;
+      tab.tab_group = -1;
       tab.id_chrome = -1;
 
       // On retourne l'onglet efface
@@ -154,14 +154,14 @@ function setGroupActif(group, callback)
   if(groupActif.list_tabs.length == 0)
   {
     // On creer un onglet a vide charger
-    var empty_tab = new classOnglet();
+    var empty_tab = new classTab();
     empty_tab.id = getNewIdTab();
     empty_tab.id_chrome = -1;
     empty_tab.url = "chrome://newtab/";
     empty_tab.pinned = false;
     empty_tab.title = "Nouvel onglet";
-    empty_tab.icone = "";
-    empty_tab.groupe_onglet = -1;
+    empty_tab.icon = "";
+    empty_tab.tab_group = -1;
 
     addGroupTab(groupActif, empty_tab);
   }

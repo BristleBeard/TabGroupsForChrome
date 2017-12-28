@@ -21,15 +21,15 @@ $( document ).ready(function() {
         if(!tab.pinned) // Ignore pinned tabs
         {
           // Creation de l'onglet
-          var nouvel_onglet = new classOnglet();
+          var nouvel_onglet = new classTab();
           
           nouvel_onglet.id = getNewIdTab();
           nouvel_onglet.id_chrome = tab.id;
           nouvel_onglet.url = tab.url;
           nouvel_onglet.title = tab.title;
           nouvel_onglet.pinned = tab.pinned;
-          nouvel_onglet.icone = tab.favIconUrl;
-          nouvel_onglet.groupe_onglet = -1;
+          nouvel_onglet.icon = tab.favIconUrl;
+          nouvel_onglet.tab_group = -1;
 
           // Ajout de l'onglet (sans ouvrir l'onglet)
           addGroupTab(groupActif, nouvel_onglet, true);

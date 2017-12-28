@@ -26,15 +26,15 @@ function loadGroup()
 	  for(var j=0 ; j < listLoadGroup[i].list_tabs.length; ++j)
 	  {
 	    // Creation de l'onglet
-	    var nouvel_onglet = new classOnglet();
+	    var nouvel_onglet = new classTab();
 
 	    nouvel_onglet.id = getNewIdTab();
 	    nouvel_onglet.id_chrome = -1;
 	    nouvel_onglet.url = listLoadGroup[i].list_tabs[j].url;
 	    nouvel_onglet.title = listLoadGroup[i].list_tabs[j].title;
             nouvel_onglet.pinned = listLoadGroup[i].list_tabs[j].pinned;
-	    nouvel_onglet.icone = listLoadGroup[i].list_tabs[j].icone;
-	    nouvel_onglet.groupe_onglet = -1;
+	    nouvel_onglet.icon = listLoadGroup[i].list_tabs[j].icon;
+	    nouvel_onglet.tab_group = -1;
 
 	    // Ajout de l'onglet (sans ouvrir l'onglet)
 	    addGroupTab(newGroup, nouvel_onglet);
