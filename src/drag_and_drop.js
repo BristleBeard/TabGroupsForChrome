@@ -5,25 +5,25 @@ function allowDrop(ev)
 
 function dragTabBegin(ev)
 {
-  ev.dataTransfer.setData("Id_lien",ev.target.id);
+  ev.dataTransfer.setData("tab_id",ev.target.id);
 }
 
 function dropTabOnGroup(ev)
 {
   ev.preventDefault();
-  
-  // Recuperation de l'id de la cible
+
+  // Retrieve the ID of the target group
   var id = getGroupId($(ev.target));
-  
-  // Suppression du lien initial
-  var tab = removeTabFromGroup(ev.dataTransfer.getData("Id_lien"));
-  
-  // Rajout dans le groupe
+
+  // Remove the original tab link
+  var tab = removeTabFromGroup(ev.dataTransfer.getData("tab_id"));
+
+  // Add tab to the target group
   addTabToGroup(getGroup(id), tab);
-  
-  // Sauvegarde
+
+  // Save the groups to local storage
   saveGroup();
-  
-  // On a fini de gerer le drop a tous les niveaux
+
+  // Prevent any further propagation of drop event
   ev.stopPropagation();
-} 
+}
