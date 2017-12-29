@@ -14,7 +14,7 @@ $( document ).ready(function() {
 
   chrome.windows.getAll({populate:true},function(windows)
   {
-    // Restore open tabs
+    // Retrieve currently open tabs
     windows.forEach(function(window){
       window.tabs.forEach(function(tab){
 
@@ -23,7 +23,7 @@ $( document ).ready(function() {
           // Create new tab object
           var new_tab = new classTab();
 
-          new_tab.id = getNewIdTab();
+          new_tab.id = getNewIdForTab();
           new_tab.id_chrome = tab.id;
           new_tab.url = tab.url;
           new_tab.title = tab.title;
@@ -32,7 +32,7 @@ $( document ).ready(function() {
           new_tab.tab_group = -1;
 
           // Add the tab (without opening it)
-          addGroupTab(activeGroup, new_tab, true);
+          addTabToGroup(activeGroup, new_tab, true);
         }
       });
     });

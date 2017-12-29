@@ -3,12 +3,12 @@ function allowDrop(ev)
   ev.preventDefault();
 }
 
-function dragLienBegin(ev)
+function dragTabBegin(ev)
 {
   ev.dataTransfer.setData("Id_lien",ev.target.id);
 }
 
-function dropLienVersGroupe(ev)
+function dropTabOnGroup(ev)
 {
   ev.preventDefault();
   
@@ -16,10 +16,10 @@ function dropLienVersGroupe(ev)
   var id = getGroupId($(ev.target));
   
   // Suppression du lien initial
-  var tab = removeTabGroup(ev.dataTransfer.getData("Id_lien"));
+  var tab = removeTabFromGroup(ev.dataTransfer.getData("Id_lien"));
   
   // Rajout dans le groupe
-  addGroupTab(getGroup(id), tab);
+  addTabToGroup(getGroup(id), tab);
   
   // Sauvegarde
   saveGroup();

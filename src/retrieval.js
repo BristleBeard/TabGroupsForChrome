@@ -27,7 +27,7 @@ function getNewId()
 
 var id_compteur = 0;
 
-function getNewIdTab()
+function getNewIdForTab()
 {
   id_compteur++;
   return id_compteur;

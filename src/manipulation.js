@@ -1,85 +1,85 @@
 /**
-* Fonctions de manipulation des goupes et onglets
+* Functions to manipulate groups and associated tabs
 */
 
 function createGroup()
 {
-  // Creation du groupe
+  // Group creation
   var new_group = new classGroup();
 
   new_group.id = getNewId();
   new_group.name = "Group " + new_group.id.toString();
 
-  // Ajout du groupe
+  // Add the group to the groups list
   list_groups.push(new_group);
 
-  // Actualisation de l'affichage
+  // Update the displayed tab groups on our extension's tab group manager page
   $("#list_groups").append(
     '<div id="group_id_' + new_group.id.toString() + '" class="group_id" >' +
       '<p class="group_head">' +
 	'<input type="text" class="group_name" value="' + new_group.name + '" >' +
-	'<button type="button" class="group_set_actif" >Open Tab Group</button>' +
+	'<button type="button" class="group_set_active" >Open Tab Group</button>' +
 	'<button type="button" class="group_remove" title="Close Group">X</button>' +
 	'<button type="button" class="group_move" draggable="true" >M</button>' +
       '</p>' +
-      '<ul class="list_onglet">' +
+      '<ul class="list_tabs">' +
       '</u>' +
     '</div>'
   );
 
-  // Autorisation du Drag&Drop
+  // Set up Drag & Drop functionality for new tab group
   $('#group_id_' + new_group.id.toString()).get(0).addEventListener('dragover', allowDrop, false);
-  $('#group_id_' + new_group.id.toString()).get(0).addEventListener('drop', dropLienVersGroupe, false);
+  $('#group_id_' + new_group.id.toString()).get(0).addEventListener('drop', dropTabOnGroup, false);
 
   return new_group;
 }
 
-function addGroupTab(group, tab, onFirstLaunch)
+function addTabToGroup(group, tab, onFirstLaunch)
 {
-  // On ne peut pas ajouter notre extention
+  // don't add our extension's tab group manager page as a tab
   if(tab.url != chrome.extension.getURL('manager.html'))
   {
-    // Rajout au groupe
+    // Add tab to the relevant tab group
     tab.tab_group = group.id;
     group.list_tabs.push(tab);
 
-    // Actualisation de l'affichage
-    var elementOngletListe = '<li draggable="true" id="tab_id_' + tab.id + '" title="' + tab.url + '" >';
+    // Update the displayed tabs in this group (on our extension's tab group manager page)
+    var tabListElement = '<li draggable="true" id="tab_id_' + tab.id + '" title="' + tab.url + '" >';
 
-    elementOngletListe += '<div class="tabButtons" >';
-      elementOngletListe += '<input type="checkbox" class="tabCheckButton" />';
-      elementOngletListe += '<button type="button" class="tabGoButton" >-&rsaquo;</button>';
-      elementOngletListe += '<button type="button" class="tabCloseButton" >-</button>';
-    elementOngletListe += '</div>';
+    tabListElement += '<div class="tabButtons" >';
+      tabListElement += '<input type="checkbox" class="tabCheckButton" />';
+      tabListElement += '<button type="button" class="tabGoButton" >-&rsaquo;</button>';
+      tabListElement += '<button type="button" class="tabCloseButton" >-</button>';
+    tabListElement += '</div>';
 
     if(tab.icon)
     {
-      elementOngletListe += '<img src="' + tab.icon + '" alt="" height="17px" /> ';
+      tabListElement += '<img src="' + tab.icon + '" alt="" height="17px" /> ';
     }
     if(tab.title)
     {
-      elementOngletListe += tab.title;
+      tabListElement += tab.title;
     }
     else
     {
-      elementOngletListe += tab.url;
+      tabListElement += tab.url;
     }
     if(tab.pinned)
     {
-      elementOngletListe += ' (P)';
+      tabListElement += ' (P)';
     }
-    elementOngletListe += '</li>';
+    tabListElement += '</li>';
 
-    $("#group_id_" + group.id.toString()).find(".list_onglet").append(elementOngletListe);
+    $("#group_id_" + group.id.toString()).find(".list_tabs").append(tabListElement);
 
-    /*$("#group_id_" + group.id.toString()).find(".list_onglet").append(
+    /*$("#group_id_" + group.id.toString()).find(".list_tabs").append(
       '<li draggable="true" id="tab_id_' + tab.id + '" >' + tab.url + '<button type="button" class="tabCloseButton" >-</button></li>'
     );*/
 
-    // Autorisation du Drag&Drop
-    $('#tab_id_' + tab.id.toString()).get(0).addEventListener('dragstart', dragLienBegin, false);
+    // Set up Drag & Drop functionality for new tab
+    $('#tab_id_' + tab.id.toString()).get(0).addEventListener('dragstart', dragTabBegin, false);
 
-    // Creation de l'onglet si group actif
+    // Create tab within browser if this tab group is the active group
     if(group.id == activeGroup.id)
     {
       createTab(tab, onFirstLaunch);
@@ -88,12 +88,12 @@ function addGroupTab(group, tab, onFirstLaunch)
 
 }
 
-function removeTabGroup(id_tab)
+function removeTabFromGroup(id_tab)
 {
-  // Suppression de l'affichage
+  // Remove this tab from the display on our extension's tab group manager page
   $('#' + id_tab).remove();
 
-  // Suppression du groupe
+  // Remove tab from the specified tab group
   var group = getGroupByTab(id_tab);
   id_tab = parseInt(id_tab.replace("tab_id_",""));
 
@@ -101,75 +101,76 @@ function removeTabGroup(id_tab)
   {
     if(group.list_tabs[i].id == id_tab)
     {
-      // Sauvegarde
+      // Store tab details for future reference
       var tab = group.list_tabs[i];
 
-      // Effacement
+      // Remove tab from list of tabs associated with this group
       group.list_tabs.splice(i, 1);
 
-      // Fermeture de l'onglet si group actif
+      // Close tab within browser if this group is the active group
       if(group.id == activeGroup.id)
       {
 	closeTab(tab);
 
-	// Verification qu'il reste un onglet apres
+	// Check whether any remaining tabs are open in the active group
 	if(activeGroup.list_tabs.length == 0)
 	{
-	  // On creer un onglet a vide charger
+	  // Create a new 'empty' tab (set to default 'New Tab' page) for browser to load
 	  var empty_tab = new classTab();
-	  empty_tab.id = getNewIdTab();
+	  empty_tab.id = getNewIdForTab();
 	  empty_tab.id_chrome = -1;
 	  empty_tab.url = "chrome://newtab/";
           empty_tab.pinned = false;
-	  empty_tab.title = "Nouvel onglet";
+	  empty_tab.title = "New Tab";
 	  empty_tab.icon = "";
 	  empty_tab.tab_group = -1;
 
-	  addGroupTab(activeGroup, empty_tab);
+	  addTabToGroup(activeGroup, empty_tab);
 	}
       }
 
       tab.tab_group = -1;
       tab.id_chrome = -1;
 
-      // On retourne l'onglet efface
+      // Return details of the removed tab
       return tab;
     }
   }
 }
 
-function setGroupActif(group, callback)
+function setActiveGroup(group, callback)
 {
   $(".active_group").removeClass("active_group");
 
-  // On ferme les onglets du groupe courant
+  // Close tabs in currently active group
   for(var i=0 ; i < activeGroup.list_tabs.length ; ++i)
   {
     closeTab(activeGroup.list_tabs[i], true);
   }
 
-  // On actualise le nouveau groupe actif
+  // Update the currently active group
   activeGroup = group;
 
+  // Check whether the new active group has any tabs
   if(activeGroup.list_tabs.length == 0)
   {
-    // On creer un onglet a vide charger
+    // Create a new 'empty' tab (set to default 'New Tab' page) for browser to load
     var empty_tab = new classTab();
-    empty_tab.id = getNewIdTab();
+    empty_tab.id = getNewIdForTab();
     empty_tab.id_chrome = -1;
     empty_tab.url = "chrome://newtab/";
     empty_tab.pinned = false;
-    empty_tab.title = "Nouvel onglet";
+    empty_tab.title = "New Tab";
     empty_tab.icon = "";
     empty_tab.tab_group = -1;
 
-    addGroupTab(activeGroup, empty_tab);
+    addTabToGroup(activeGroup, empty_tab);
   }
 
   $("#group_id_" + activeGroup.id.toString()).addClass("active_group");
 
-  // On ouvre les onglets
-  console.log("Ouverture :" + activeGroup.name);
+  // Open the tabs within the new active group in the browser
+  console.log("Opening tab group: " + activeGroup.name);
   var counter = 0;
   for(var i=0 ; i < activeGroup.list_tabs.length ; ++i)
   {

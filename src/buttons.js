@@ -33,7 +33,7 @@ $( document ).ready(function() {
       }
 
       //ferme les onglets du groupe courant et ouvrent ceux du prochain
-      setGroupActif(next_group);
+      setActiveGroup(next_group);
 
       // Sauvegarde
       saveGroup();
@@ -49,8 +49,8 @@ $( document ).ready(function() {
     saveGroup();
   });
 
-  $("#list_groups").on( "click", ".group_set_actif", function() {
-    setGroupActif(getGroup(getGroupId($(this))), function() {
+  $("#list_groups").on( "click", ".group_set_active", function() {
+    setActiveGroup(getGroup(getGroupId($(this))), function() {
         // Use callback to avoid race condition where the current tab is closed before
         // the new group being opened (could potentially close the windows or terminate
         // the script before complete execution)

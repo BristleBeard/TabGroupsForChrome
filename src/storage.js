@@ -28,7 +28,7 @@ function loadGroup()
 	    // Creation de l'onglet
 	    var nouvel_onglet = new classTab();
 
-	    nouvel_onglet.id = getNewIdTab();
+	    nouvel_onglet.id = getNewIdForTab();
 	    nouvel_onglet.id_chrome = -1;
 	    nouvel_onglet.url = listLoadGroup[i].list_tabs[j].url;
 	    nouvel_onglet.title = listLoadGroup[i].list_tabs[j].title;
@@ -37,7 +37,7 @@ function loadGroup()
 	    nouvel_onglet.tab_group = -1;
 
 	    // Ajout de l'onglet (sans ouvrir l'onglet)
-	    addGroupTab(newGroup, nouvel_onglet);
+	    addTabToGroup(newGroup, nouvel_onglet);
 	  }
 	}
       }
