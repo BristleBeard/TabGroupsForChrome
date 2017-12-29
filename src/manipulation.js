@@ -80,7 +80,7 @@ function addGroupTab(group, tab, onFirstLaunch)
     $('#tab_id_' + tab.id.toString()).get(0).addEventListener('dragstart', dragLienBegin, false);
 
     // Creation de l'onglet si group actif
-    if(group.id == groupActif.id)
+    if(group.id == activeGroup.id)
     {
       createTab(tab, onFirstLaunch);
     }
@@ -108,12 +108,12 @@ function removeTabGroup(id_tab)
       group.list_tabs.splice(i, 1);
 
       // Fermeture de l'onglet si group actif
-      if(group.id == groupActif.id)
+      if(group.id == activeGroup.id)
       {
 	closeTab(tab);
 
 	// Verification qu'il reste un onglet apres
-	if(groupActif.list_tabs.length == 0)
+	if(activeGroup.list_tabs.length == 0)
 	{
 	  // On creer un onglet a vide charger
 	  var empty_tab = new classTab();
@@ -125,7 +125,7 @@ function removeTabGroup(id_tab)
 	  empty_tab.icon = "";
 	  empty_tab.tab_group = -1;
 
-	  addGroupTab(groupActif, empty_tab);
+	  addGroupTab(activeGroup, empty_tab);
 	}
       }
 
@@ -140,18 +140,18 @@ function removeTabGroup(id_tab)
 
 function setGroupActif(group, callback)
 {
-  $(".group_actif").removeClass("group_actif");
+  $(".active_group").removeClass("active_group");
 
   // On ferme les onglets du groupe courant
-  for(var i=0 ; i < groupActif.list_tabs.length ; ++i)
+  for(var i=0 ; i < activeGroup.list_tabs.length ; ++i)
   {
-    closeTab(groupActif.list_tabs[i], true);
+    closeTab(activeGroup.list_tabs[i], true);
   }
 
   // On actualise le nouveau groupe actif
-  groupActif = group;
+  activeGroup = group;
 
-  if(groupActif.list_tabs.length == 0)
+  if(activeGroup.list_tabs.length == 0)
   {
     // On creer un onglet a vide charger
     var empty_tab = new classTab();
@@ -163,19 +163,19 @@ function setGroupActif(group, callback)
     empty_tab.icon = "";
     empty_tab.tab_group = -1;
 
-    addGroupTab(groupActif, empty_tab);
+    addGroupTab(activeGroup, empty_tab);
   }
 
-  $("#group_id_" + groupActif.id.toString()).addClass("group_actif");
+  $("#group_id_" + activeGroup.id.toString()).addClass("active_group");
 
   // On ouvre les onglets
-  console.log("Ouverture :" + groupActif.name);
+  console.log("Ouverture :" + activeGroup.name);
   var counter = 0;
-  for(var i=0 ; i < groupActif.list_tabs.length ; ++i)
+  for(var i=0 ; i < activeGroup.list_tabs.length ; ++i)
   {
-    createTab(groupActif.list_tabs[i], undefined, function () {
+    createTab(activeGroup.list_tabs[i], undefined, function () {
         ++counter; // Apparently Js is single threaded so no need to use semaphore or other protection
-        if (counter == groupActif.list_tabs.length) { // When the last tab has been opened, we call the callback
+        if (counter == activeGroup.list_tabs.length) { // When the last tab has been opened, we call the callback
             callback();
         }
     });

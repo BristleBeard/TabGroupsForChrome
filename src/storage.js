@@ -5,8 +5,8 @@ function loadGroup()
     chrome.storage.sync.get(["nom_actif"], function(items){
       if(items["nom_actif"])
       {
-	groupActif.name = items["nom_actif"];
-	$("#group_id_" + groupActif.id.toString()).find(".group_name").val(groupActif.name);
+	activeGroup.name = items["nom_actif"];
+	$("#group_id_" + activeGroup.id.toString()).find(".group_name").val(activeGroup.name);
       }
       else
       {
@@ -57,13 +57,13 @@ function saveGroup(callback)
     for(var i=0 ; i < list_groups.length; ++i)
     {
       // On les copies tous sauf l'actif
-      if(list_groups[i].id != groupActif.id)
+      if(list_groups[i].id != activeGroup.id)
       {
 	listSaveGroup.push(list_groups[i]);
       }
     }
     // Exportation du nom actif
-    chrome.storage.sync.set({"nom_actif":groupActif.name});
+    chrome.storage.sync.set({"nom_actif": activeGroup.name});
 
     // On decoupe la liste a sauvegarder en parties
     var hugeStorage = new HugeStorageSync();

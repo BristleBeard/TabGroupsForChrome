@@ -14,11 +14,11 @@ $( document ).ready(function() {
 
     var group = getGroup(getGroupId($(this)));
 
-    if(group.id == groupActif.id)
+    if(group.id == activeGroup.id)
     {
       // On defini le prochain groupe comme etant actif
       var next_group = list_groups[0];// On prend le premier groupe que l'on trouve
-      if(next_group.id == groupActif.id)// Si c'est le meme
+      if(next_group.id == activeGroup.id)// Si c'est le meme
       {
         // Il existe un autre groupe
         if(list_groups.length > 1)
