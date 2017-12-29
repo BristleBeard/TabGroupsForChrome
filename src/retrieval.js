@@ -1,56 +1,56 @@
 /**
- * Fonctions de recherche 
+ * Search/retrieval functions
  */
 
-function getNewId() 
+function getNewIdForGroup()
 {
-  var valide = false;
+  var valid = false;
   var id = 0;
-  while(!valide)
+  while(!valid)
   {
-    valide = true;
-    
+    valid = true;
+
     for (var i = 0 ; i < list_groups.length ; ++i)
     {
-      // On verifie si l'id n'existe pas
+      // Check if the ID does not already exist within the list of groups
       if(list_groups[i].id == id)
       {
-	valide = false;
+	valid = false;
       }
     }
-    
+
     id++;
   }
   return id-1;
 }
 
 
-var id_compteur = 0;
+var id_counter = 0;
 
 function getNewIdForTab()
 {
-  id_compteur++;
-  return id_compteur;
+  id_counter++;
+  return id_counter;
 }
 
-function getGroupId(element) 
+function getGroupId(element)
 {
-  var id_nom = "-1";
-  
-  // On verifie d'abord que l'element n'est pas deja un groupe
+  var group_id = "-1";
+
+  // First check whether the supplied element is already a group
   if(element.hasClass("group_id"))
   {
-    id_nom = element.attr("id");
+    group_id = element.attr("id");
   }
   else
   {
-    id_nom = element.closest(".group_id").attr("id");
+    group_id = element.closest(".group_id").attr("id");
   }
-  
-  return parseInt(id_nom.replace("group_id_",""));
+
+  return parseInt(group_id.replace("group_id_",""));
 }
 
-function getGroup(id) 
+function getGroup(id)
 {
   for(var i=0 ; i < list_groups.length ; i++)
   {
@@ -59,13 +59,13 @@ function getGroup(id)
       return list_groups[i];
     }
   }
-  console.error("Groupe non trouve : " + id.toString());
-} 
+  console.error("Group not found: " + id.toString());
+}
 
 function getGroupByTab(tab_id)
 {
   tab_id = parseInt(tab_id.replace("tab_id_",""));
-  
+
   for(var i=0 ; i < list_groups.length ; i++)
   {
     for(var j=0 ; j < list_groups[i].list_tabs.length ; j++)
@@ -76,5 +76,5 @@ function getGroupByTab(tab_id)
       }
     }
   }
-  console.error("Aucun groupe ne contient : " + tab_id.toString());
+  console.error("No group contains tab: " + tab_id.toString());
 }

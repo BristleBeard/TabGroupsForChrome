@@ -7,7 +7,7 @@ function createGroup()
   // Group creation
   var new_group = new classGroup();
 
-  new_group.id = getNewId();
+  new_group.id = getNewIdForGroup();
   new_group.name = "Group " + new_group.id.toString();
 
   // Add the group to the groups list
