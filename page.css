@@ -27,7 +27,7 @@ header
   width:100%;
 }
 
-.group_actif
+.active_group
 {
   background-color: white;
 }
@@ -44,7 +44,7 @@ header
   border-bottom:2px solid #d5d5d5;
 }
 
-#list_groups
+#groups_list
 {
   -webkit-column-count:3;
   column-count:2;
@@ -55,7 +55,7 @@ header
 }
 
 
-.list_onglet
+.tabs_list
 {
   max-height:400px;
   overflow:auto;
@@ -63,19 +63,19 @@ header
   padding:7px;
 }
 
-.list_onglet li
+.tabs_list li
 {
   clear:right;
   padding-left:15px;
   margin-bottom:1px;
 }
 
-.list_onglet li img
+.tabs_list li img
 {
   vertical-align:middle;
 }
 
-.list_onglet li:hover
+.tabs_list li:hover
 {
   background-color:#929292;
 }

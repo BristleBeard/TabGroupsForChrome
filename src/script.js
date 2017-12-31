@@ -1,47 +1,47 @@
 /**
- * Script principal
+ * Main script
  */
 
-console.log("Debut du script :");
+console.log("Start Tab Groups script:");
 
-var list_groups = new Array();
-var groupActif;
+var groupsList = new Array();
+var activeGroup;
 
 $( document ).ready(function() {
-  
-  groupActif = createGroup();
-  $("#group_id_" + groupActif.id.toString()).addClass("group_actif");
-  
+
+  activeGroup = createGroup();
+  $("#group_id_" + activeGroup.id.toString()).addClass("active_group");
+
   chrome.windows.getAll({populate:true},function(windows)
   {
-    // Recuperation des onglets ouverts
+    // Retrieve currently open tabs
     windows.forEach(function(window){
       window.tabs.forEach(function(tab){
-        
+
         if(!tab.pinned) // Ignore pinned tabs
         {
-          // Creation de l'onglet
-          var nouvel_onglet = new classOnglet();
-          
-          nouvel_onglet.id = getNewIdTab();
-          nouvel_onglet.id_chrome = tab.id;
-          nouvel_onglet.url = tab.url;
-          nouvel_onglet.title = tab.title;
-          nouvel_onglet.pinned = tab.pinned;
-          nouvel_onglet.icone = tab.favIconUrl;
-          nouvel_onglet.groupe_onglet = -1;
+          // Create new tab object
+          var new_tab = new classTab();
 
-          // Ajout de l'onglet (sans ouvrir l'onglet)
-          addGroupTab(groupActif, nouvel_onglet, true);
+          new_tab.id = getNewIdForTab();
+          new_tab.id_chrome = tab.id;
+          new_tab.url = tab.url;
+          new_tab.title = tab.title;
+          new_tab.pinned = tab.pinned;
+          new_tab.icon = tab.favIconUrl;
+          new_tab.tab_group = -1;
+
+          // Add the tab (without opening it)
+          addTabToGroup(activeGroup, new_tab, true);
         }
       });
     });
-    
-    
-    // Recuperation des groupes enregistres
-    loadGroup();
-    
+
+
+    // Load previously stored tab groups
+    loadGroups();
+
   });
-    
+
 });
 
