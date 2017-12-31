@@ -3,7 +3,7 @@ $( document ).ready(function() {
   $("#create_group").click(function() {
     createGroup();
     // Save the groups to local storage
-    saveGroup();
+    saveGroups();
   });
 
   $("#list_groups").on( "click", ".group_remove", function() {
@@ -36,7 +36,7 @@ $( document ).ready(function() {
       setActiveGroup(next_group);
 
       // Save the groups to local storage
-      saveGroup();
+      saveGroups();
     }
 
     // Remove the tab group from our extension's tab group manager page
@@ -46,7 +46,7 @@ $( document ).ready(function() {
     list_groups.splice(list_groups.indexOf(group), 1);
 
     // Save the groups to local storage
-    saveGroup();
+    saveGroups();
   });
 
   $("#list_groups").on( "click", ".group_set_active", function() {
@@ -55,7 +55,7 @@ $( document ).ready(function() {
         // the new group has been opened (could potentially close the windows or terminate
         // the script before complete execution)
         // Save the groups to local storage
-        saveGroup(function() {
+        saveGroups(function() {
             close();
         });
     });
@@ -66,7 +66,7 @@ $( document ).ready(function() {
     group.name = $(this).val();
 
     // Save the groups to local storage
-    saveGroup();
+    saveGroups();
   });
 
 });

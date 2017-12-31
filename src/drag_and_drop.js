@@ -22,7 +22,7 @@ function dropTabOnGroup(ev)
   addTabToGroup(getGroup(id), tab);
 
   // Save the groups to local storage
-  saveGroup();
+  saveGroups();
 
   // Prevent any further propagation of drop event
   ev.stopPropagation();

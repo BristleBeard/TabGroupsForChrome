@@ -39,7 +39,7 @@ $( document ).ready(function() {
 
 
     // Load previously stored tab groups
-    loadGroup();
+    loadGroups();
 
   });
 

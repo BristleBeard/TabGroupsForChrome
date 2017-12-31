@@ -1,73 +1,72 @@
-function loadGroup()
+function loadGroups()
 {
   var hugeStorage = new HugeStorageSync();
-  hugeStorage.get("lg", function(string_totale){
-    chrome.storage.sync.get(["nom_actif"], function(items){
-      if(items["nom_actif"])
+  hugeStorage.get("lg", function(strLoadedGroups){
+    chrome.storage.sync.get(["active_group_name"], function(items){
+      if(items["active_group_name"])
       {
-	activeGroup.name = items["nom_actif"];
+	activeGroup.name = items["active_group_name"];
 	$("#group_id_" + activeGroup.id.toString()).find(".group_name").val(activeGroup.name);
       }
       else
       {
-	console.log("Premier lancement...");
+	console.log("First launch...");
       }
 
-      if(string_totale != "")
+      if(strLoadedGroups != "")
       {
-	var listLoadGroup = JSON.parse(string_totale);;
+	var loadedGroupsList = JSON.parse(strLoadedGroups);
 
-	for(var i=0 ; i < listLoadGroup.length; ++i)
+	for(var i=0; i < loadedGroupsList.length; ++i)
 	{
 	  var newGroup = createGroup();
-	  newGroup.name = listLoadGroup[i].name;
+	  newGroup.name = loadedGroupsList[i].name;
 	  $("#group_id_" + newGroup.id.toString()).find(".group_name").val(newGroup.name);
 
-	  for(var j=0 ; j < listLoadGroup[i].list_tabs.length; ++j)
+	  for(var j=0 ; j < loadedGroupsList[i].list_tabs.length; ++j)
 	  {
-	    // Creation de l'onglet
-	    var nouvel_onglet = new classTab();
+	    // Create tab in loaded group
+	    var new_tab = new classTab();
 
-	    nouvel_onglet.id = getNewIdForTab();
-	    nouvel_onglet.id_chrome = -1;
-	    nouvel_onglet.url = listLoadGroup[i].list_tabs[j].url;
-	    nouvel_onglet.title = listLoadGroup[i].list_tabs[j].title;
-            nouvel_onglet.pinned = listLoadGroup[i].list_tabs[j].pinned;
-	    nouvel_onglet.icon = listLoadGroup[i].list_tabs[j].icon;
-	    nouvel_onglet.tab_group = -1;
+	    new_tab.id = getNewIdForTab();
+	    new_tab.id_chrome = -1;
+	    new_tab.url = loadedGroupsList[i].list_tabs[j].url;
+	    new_tab.title = loadedGroupsList[i].list_tabs[j].title;
+            new_tab.pinned = loadedGroupsList[i].list_tabs[j].pinned;
+	    new_tab.icon = loadedGroupsList[i].list_tabs[j].icon;
+	    new_tab.tab_group = -1;
 
-	    // Ajout de l'onglet (sans ouvrir l'onglet)
-	    addTabToGroup(newGroup, nouvel_onglet);
+	    // Add the tab (without opening it)
+	    addTabToGroup(newGroup, new_tab);
 	  }
 	}
       }
       else
       {
-	console.log("Non trouve");
+	console.log("No saved tab groups found");
       }
     });
   });
 }
 
-function saveGroup(callback)
+function saveGroups(callback)
 {
   //chrome.storage.sync.clear(function() {
-    // Apres avoir videe l'espace de stockage
-    var listSaveGroup = new Array();
+    var saveGroupsList = new Array();
     for(var i=0 ; i < list_groups.length; ++i)
     {
-      // On les copies tous sauf l'actif
+      // Save all groups except the active group
       if(list_groups[i].id != activeGroup.id)
       {
-	listSaveGroup.push(list_groups[i]);
+	saveGroupsList.push(list_groups[i]);
       }
     }
-    // Exportation du nom actif
-    chrome.storage.sync.set({"nom_actif": activeGroup.name});
+    // Save the name of the active group
+    chrome.storage.sync.set({"active_group_name": activeGroup.name});
 
-    // On decoupe la liste a sauvegarder en parties
+    // Split the list of groups into 'chunks', and save them to local storage
     var hugeStorage = new HugeStorageSync();
-    hugeStorage.set('lg', JSON.stringify(listSaveGroup), callback);
+    hugeStorage.set('lg', JSON.stringify(saveGroupsList), callback);
     //chrome.storage.sync.set({"list_groups":storageSplit});
   //});
 }
