@@ -4,7 +4,7 @@
 
 console.log("Start Tab Groups script:");
 
-var list_groups = new Array();
+var groupsList = new Array();
 var activeGroup;
 
 $( document ).ready(function() {

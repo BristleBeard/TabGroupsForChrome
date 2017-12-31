@@ -10,10 +10,10 @@ function getNewIdForGroup()
   {
     valid = true;
 
-    for (var i = 0 ; i < list_groups.length ; ++i)
+    for (var i = 0 ; i < groupsList.length ; ++i)
     {
       // Check if the ID does not already exist within the list of groups
-      if(list_groups[i].id == id)
+      if(groupsList[i].id == id)
       {
 	valid = false;
       }
@@ -52,11 +52,11 @@ function getGroupId(element)
 
 function getGroup(id)
 {
-  for(var i=0 ; i < list_groups.length ; i++)
+  for(var i=0 ; i < groupsList.length ; i++)
   {
-    if(list_groups[i].id == id)
+    if(groupsList[i].id == id)
     {
-      return list_groups[i];
+      return groupsList[i];
     }
   }
   console.error("Group not found: " + id.toString());
@@ -66,13 +66,13 @@ function getGroupByTab(tab_id)
 {
   tab_id = parseInt(tab_id.replace("tab_id_",""));
 
-  for(var i=0 ; i < list_groups.length ; i++)
+  for(var i=0 ; i < groupsList.length ; i++)
   {
-    for(var j=0 ; j < list_groups[i].list_tabs.length ; j++)
+    for(var j=0 ; j < groupsList[i].list_tabs.length ; j++)
     {
-      if(list_groups[i].list_tabs[j].id == tab_id)
+      if(groupsList[i].list_tabs[j].id == tab_id)
       {
-	return list_groups[i];
+	return groupsList[i];
       }
     }
   }

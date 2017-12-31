@@ -11,10 +11,10 @@ function createGroup()
   new_group.name = "Group " + new_group.id.toString();
 
   // Add the group to the groups list
-  list_groups.push(new_group);
+  groupsList.push(new_group);
 
   // Update the displayed tab groups on our extension's tab group manager page
-  $("#list_groups").append(
+  $("#groups_list").append(
     '<div id="group_id_' + new_group.id.toString() + '" class="group_id" >' +
       '<p class="group_head">' +
 	'<input type="text" class="group_name" value="' + new_group.name + '" >' +

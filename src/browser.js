@@ -1,6 +1,6 @@
 function createTab(tab, onFirstLaunch, callback)
 {
-  if(!onFirstLaunch)// We do not re-open tabs which are already open
+  if(!onFirstLaunch)// Do not re-open tabs which are already open
   {
       chrome.tabs.create({url:tab.url, active:false, pinned:tab.pinned}, function(createdTab) {
       // Retrieve the Chrome tab ID

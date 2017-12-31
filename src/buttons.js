@@ -6,7 +6,7 @@ $( document ).ready(function() {
     saveGroups();
   });
 
-  $("#list_groups").on( "click", ".group_remove", function() {
+  $("#groups_list").on( "click", ".group_remove", function() {
     if( ! confirm('Close this tab group?'))
     {
       return;
@@ -17,13 +17,13 @@ $( document ).ready(function() {
     if(group.id == activeGroup.id)
     {
       // Define the next group as active
-      var next_group = list_groups[0];// Get the first available group
+      var next_group = groupsList[0];// Get the first available group
       if(next_group.id == activeGroup.id)// Check if it is the same group
       {
         // There is at least one other group, so use the next one
-        if(list_groups.length > 1)
+        if(groupsList.length > 1)
         {
-          next_group = list_groups[1];
+          next_group = groupsList[1];
         }
         // Otherwise, create a new one
         else
@@ -43,13 +43,13 @@ $( document ).ready(function() {
     $("#group_id_" + group.id.toString()).remove();
 
     // Remove group from the list of groups
-    list_groups.splice(list_groups.indexOf(group), 1);
+    groupsList.splice(groupsList.indexOf(group), 1);
 
     // Save the groups to local storage
     saveGroups();
   });
 
-  $("#list_groups").on( "click", ".group_set_active", function() {
+  $("#groups_list").on( "click", ".group_set_active", function() {
     setActiveGroup(getGroup(getGroupId($(this))), function() {
         // Use callback to avoid race condition where the current tab is closed before
         // the new group has been opened (could potentially close the windows or terminate
@@ -61,7 +61,7 @@ $( document ).ready(function() {
     });
   });
 
-  $("#list_groups").on( "blur", ".group_name", function() {
+  $("#groups_list").on( "blur", ".group_name", function() {
     group = getGroup(getGroupId($(this)));
     group.name = $(this).val();
 

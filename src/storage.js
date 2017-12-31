@@ -53,12 +53,12 @@ function saveGroups(callback)
 {
   //chrome.storage.sync.clear(function() {
     var saveGroupsList = new Array();
-    for(var i=0 ; i < list_groups.length; ++i)
+    for(var i=0 ; i < groupsList.length; ++i)
     {
       // Save all groups except the active group
-      if(list_groups[i].id != activeGroup.id)
+      if(groupsList[i].id != activeGroup.id)
       {
-	saveGroupsList.push(list_groups[i]);
+	saveGroupsList.push(groupsList[i]);
       }
     }
     // Save the name of the active group
@@ -67,6 +67,6 @@ function saveGroups(callback)
     // Split the list of groups into 'chunks', and save them to local storage
     var hugeStorage = new HugeStorageSync();
     hugeStorage.set('lg', JSON.stringify(saveGroupsList), callback);
-    //chrome.storage.sync.set({"list_groups":storageSplit});
+    //chrome.storage.sync.set({"groups_list":storageSplit});
   //});
 }
