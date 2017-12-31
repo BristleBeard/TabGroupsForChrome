@@ -55,7 +55,7 @@ header
 }
 
 
-.list_tabs
+.tabs_list
 {
   max-height:400px;
   overflow:auto;
@@ -63,19 +63,19 @@ header
   padding:7px;
 }
 
-.list_tabs li
+.tabs_list li
 {
   clear:right;
   padding-left:15px;
   margin-bottom:1px;
 }
 
-.list_tabs li img
+.tabs_list li img
 {
   vertical-align:middle;
 }
 
-.list_tabs li:hover
+.tabs_list li:hover
 {
   background-color:#929292;
 }

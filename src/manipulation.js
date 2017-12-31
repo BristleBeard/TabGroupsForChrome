@@ -22,7 +22,7 @@ function createGroup()
 	'<button type="button" class="group_remove" title="Close Group">X</button>' +
 	'<button type="button" class="group_move" draggable="true" >M</button>' +
       '</p>' +
-      '<ul class="list_tabs">' +
+      '<ul class="tabs_list">' +
       '</u>' +
     '</div>'
   );
@@ -41,7 +41,7 @@ function addTabToGroup(group, tab, onFirstLaunch)
   {
     // Add tab to the relevant tab group
     tab.tab_group = group.id;
-    group.list_tabs.push(tab);
+    group.tabs_list.push(tab);
 
     // Update the displayed tabs in this group (on our extension's tab group manager page)
     var tabListElement = '<li draggable="true" id="tab_id_' + tab.id + '" title="' + tab.url + '" >';
@@ -70,9 +70,9 @@ function addTabToGroup(group, tab, onFirstLaunch)
     }
     tabListElement += '</li>';
 
-    $("#group_id_" + group.id.toString()).find(".list_tabs").append(tabListElement);
+    $("#group_id_" + group.id.toString()).find(".tabs_list").append(tabListElement);
 
-    /*$("#group_id_" + group.id.toString()).find(".list_tabs").append(
+    /*$("#group_id_" + group.id.toString()).find(".tabs_list").append(
       '<li draggable="true" id="tab_id_' + tab.id + '" >' + tab.url + '<button type="button" class="tabCloseButton" >-</button></li>'
     );*/
 
@@ -97,15 +97,15 @@ function removeTabFromGroup(id_tab)
   var group = getGroupByTab(id_tab);
   id_tab = parseInt(id_tab.replace("tab_id_",""));
 
-  for(var i=0 ; i < group.list_tabs.length ; i++)
+  for(var i=0 ; i < group.tabs_list.length ; i++)
   {
-    if(group.list_tabs[i].id == id_tab)
+    if(group.tabs_list[i].id == id_tab)
     {
       // Store tab details for future reference
-      var tab = group.list_tabs[i];
+      var tab = group.tabs_list[i];
 
       // Remove tab from list of tabs associated with this group
-      group.list_tabs.splice(i, 1);
+      group.tabs_list.splice(i, 1);
 
       // Close tab within browser if this group is the active group
       if(group.id == activeGroup.id)
@@ -113,7 +113,7 @@ function removeTabFromGroup(id_tab)
 	closeTab(tab);
 
 	// Check whether any remaining tabs are open in the active group
-	if(activeGroup.list_tabs.length == 0)
+	if(activeGroup.tabs_list.length == 0)
 	{
 	  // Create a new 'empty' tab (set to default 'New Tab' page) for browser to load
 	  var empty_tab = new classTab();
@@ -143,16 +143,16 @@ function setActiveGroup(group, callback)
   $(".active_group").removeClass("active_group");
 
   // Close tabs in currently active group
-  for(var i=0 ; i < activeGroup.list_tabs.length ; ++i)
+  for(var i=0 ; i < activeGroup.tabs_list.length ; ++i)
   {
-    closeTab(activeGroup.list_tabs[i], true);
+    closeTab(activeGroup.tabs_list[i], true);
   }
 
   // Update the currently active group
   activeGroup = group;
 
   // Check whether the new active group has any tabs
-  if(activeGroup.list_tabs.length == 0)
+  if(activeGroup.tabs_list.length == 0)
   {
     // Create a new 'empty' tab (set to default 'New Tab' page) for browser to load
     var empty_tab = new classTab();
@@ -172,11 +172,11 @@ function setActiveGroup(group, callback)
   // Open the tabs within the new active group in the browser
   console.log("Opening tab group: " + activeGroup.name);
   var counter = 0;
-  for(var i=0 ; i < activeGroup.list_tabs.length ; ++i)
+  for(var i=0 ; i < activeGroup.tabs_list.length ; ++i)
   {
-    createTab(activeGroup.list_tabs[i], undefined, function () {
+    createTab(activeGroup.tabs_list[i], undefined, function () {
         ++counter; // Apparently Js is single threaded so no need to use semaphore or other protection
-        if (counter == activeGroup.list_tabs.length) { // When the last tab has been opened, we call the callback
+        if (counter == activeGroup.tabs_list.length) { // When the last tab has been opened, we call the callback
             callback();
         }
     });

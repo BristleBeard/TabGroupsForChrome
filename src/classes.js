@@ -12,5 +12,5 @@ var classTab = function() {
 var classGroup = function() {
   this.id;
   this.name;
-  this.list_tabs = new Array();
+  this.tabs_list = new Array();
 };

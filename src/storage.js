@@ -23,17 +23,17 @@ function loadGroups()
 	  newGroup.name = loadedGroupsList[i].name;
 	  $("#group_id_" + newGroup.id.toString()).find(".group_name").val(newGroup.name);
 
-	  for(var j=0 ; j < loadedGroupsList[i].list_tabs.length; ++j)
+	  for(var j=0 ; j < loadedGroupsList[i].tabs_list.length; ++j)
 	  {
 	    // Create tab in loaded group
 	    var new_tab = new classTab();
 
 	    new_tab.id = getNewIdForTab();
 	    new_tab.id_chrome = -1;
-	    new_tab.url = loadedGroupsList[i].list_tabs[j].url;
-	    new_tab.title = loadedGroupsList[i].list_tabs[j].title;
-            new_tab.pinned = loadedGroupsList[i].list_tabs[j].pinned;
-	    new_tab.icon = loadedGroupsList[i].list_tabs[j].icon;
+	    new_tab.url = loadedGroupsList[i].tabs_list[j].url;
+	    new_tab.title = loadedGroupsList[i].tabs_list[j].title;
+            new_tab.pinned = loadedGroupsList[i].tabs_list[j].pinned;
+	    new_tab.icon = loadedGroupsList[i].tabs_list[j].icon;
 	    new_tab.tab_group = -1;
 
 	    // Add the tab (without opening it)

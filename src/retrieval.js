@@ -68,9 +68,9 @@ function getGroupByTab(tab_id)
 
   for(var i=0 ; i < groupsList.length ; i++)
   {
-    for(var j=0 ; j < groupsList[i].list_tabs.length ; j++)
+    for(var j=0 ; j < groupsList[i].tabs_list.length ; j++)
     {
-      if(groupsList[i].list_tabs[j].id == tab_id)
+      if(groupsList[i].tabs_list[j].id == tab_id)
       {
 	return groupsList[i];
       }
