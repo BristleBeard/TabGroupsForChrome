@@ -2,7 +2,7 @@ $( document ).ready(function() {
 
   $("#create_group").click(function() {
     createGroup();
-    // Sauvegarde
+    // Save the groups to local storage
     saveGroup();
   });
 
@@ -16,45 +16,45 @@ $( document ).ready(function() {
 
     if(group.id == activeGroup.id)
     {
-      // On defini le prochain groupe comme etant actif
-      var next_group = list_groups[0];// On prend le premier groupe que l'on trouve
-      if(next_group.id == activeGroup.id)// Si c'est le meme
+      // Define the next group as active
+      var next_group = list_groups[0];// Get the first available group
+      if(next_group.id == activeGroup.id)// Check if it is the same group
       {
-        // Il existe un autre groupe
+        // There is at least one other group, so use the next one
         if(list_groups.length > 1)
         {
           next_group = list_groups[1];
         }
-        // Ou pas
+        // Otherwise, create a new one
         else
         {
           next_group = createGroup();
         }
       }
 
-      //ferme les onglets du groupe courant et ouvrent ceux du prochain
+      // Close the tabs in the current group and open those in the next
       setActiveGroup(next_group);
 
-      // Sauvegarde
+      // Save the groups to local storage
       saveGroup();
     }
 
-    // Modification de l'affichage
+    // Remove the tab group from our extension's tab group manager page
     $("#group_id_" + group.id.toString()).remove();
 
-    // Suppression du groupe
+    // Remove group from the list of groups
     list_groups.splice(list_groups.indexOf(group), 1);
 
-    // Sauvegarde
+    // Save the groups to local storage
     saveGroup();
   });
 
   $("#list_groups").on( "click", ".group_set_active", function() {
     setActiveGroup(getGroup(getGroupId($(this))), function() {
         // Use callback to avoid race condition where the current tab is closed before
-        // the new group being opened (could potentially close the windows or terminate
+        // the new group has been opened (could potentially close the windows or terminate
         // the script before complete execution)
-        // Sauvegarde
+        // Save the groups to local storage
         saveGroup(function() {
             close();
         });
@@ -65,7 +65,7 @@ $( document ).ready(function() {
     group = getGroup(getGroupId($(this)));
     group.name = $(this).val();
 
-    // Sauvegarde
+    // Save the groups to local storage
     saveGroup();
   });
 
