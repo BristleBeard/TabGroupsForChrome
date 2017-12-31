@@ -1,7 +1,7 @@
 function loadGroups()
 {
   var hugeStorage = new HugeStorageSync();
-  hugeStorage.get("lg", function(strLoadedGroups){
+  hugeStorage.get("tab_groups", function(strLoadedGroups){
     chrome.storage.sync.get(["active_group_name"], function(items){
       if(items["active_group_name"])
       {
@@ -66,7 +66,7 @@ function saveGroups(callback)
 
     // Split the list of groups into 'chunks', and save them to local storage
     var hugeStorage = new HugeStorageSync();
-    hugeStorage.set('lg', JSON.stringify(saveGroupsList), callback);
+    hugeStorage.set('tab_groups', JSON.stringify(saveGroupsList), callback);
     //chrome.storage.sync.set({"groups_list":storageSplit});
   //});
 }
