@@ -39,6 +39,10 @@ header {
     border-bottom: 2px solid #d5d5d5;
 }
 
+.active_group .group_head .group_set_active {
+    display: none;
+}
+
 #groups_list {
     -webkit-column-count: 3;
     column-count: 2;

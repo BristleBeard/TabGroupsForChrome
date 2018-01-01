@@ -85,7 +85,7 @@ function addTabToGroup(group, tab, disableTabCreation) {
 
 }
 
-function createNewEmptyTab(group) {
+function createNewEmptyTab(group, disableTabCreation) {
     // Create a new 'empty' tab (set to default 'New Tab' page) for browser to load
     var empty_tab = new classTab();
     empty_tab.id = getNewIdForTab();
@@ -96,7 +96,7 @@ function createNewEmptyTab(group) {
     empty_tab.icon = "";
     empty_tab.tab_group = -1;
 
-    addTabToGroup(group, empty_tab);
+    addTabToGroup(group, empty_tab, disableTabCreation);
 }
 
 function removeTabFromGroup(id_tab) {
@@ -150,8 +150,11 @@ function setActiveGroup(group, callback) {
 
     // Check whether the new active group has any tabs
     if(activeGroup.tabs_list.length == 0) {
-        // Create a new 'empty' tab (set to default 'New Tab' page) for browser to load
-        createNewEmptyTab(activeGroup);
+        /* Create a new 'empty' tab (set to default 'New Tab' page) for browser to load
+           (note: prevent tab from being created within browser itself, since this will
+            occur anyway when createTab() function is called below. Fixes bug where 2
+            new tabs were opened instead of 1.) */
+        createNewEmptyTab(activeGroup, true);
     }
 
     $("#group_id_" + activeGroup.id.toString()).addClass("active_group");
