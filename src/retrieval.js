@@ -20,10 +20,13 @@ function getNewIdForGroup() {
     return id - 1;
 }
 
-var id_counter = 0;
 function getNewIdForTab() {
-    id_counter++;
-    return id_counter;
+    // Use 'static' variable which increments tab ID counter every time function is called
+    if(typeof getNewIdForTab.id_counter == 'undefined') {
+        getNewIdForTab.id_counter = 0;
+    }
+    getNewIdForTab.id_counter++;
+    return getNewIdForTab.id_counter;
 }
 
 function getGroupId(element) {
@@ -59,6 +62,6 @@ function getGroupByTab(tab_id) {
             }
         }
     }
-    
+
     console.error("No group contains tab: " + tab_id.toString());
 }

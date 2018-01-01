@@ -1,3 +1,7 @@
+/**
+ * Define the classes/objects which will store tab and tab group data
+ */
+
 var classTab = function() {
     this.id;
     this.id_chrome;
