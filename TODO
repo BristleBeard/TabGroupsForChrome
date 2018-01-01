@@ -3,8 +3,8 @@ UTF8 encoding (no html in the displayed name)
 DONE: When closing group: creates two empty tabs
 
 [Features]
-Close tab link/button
-Go to tab link/button
+DONE: Close tab link/button
+DONE: Go to tab link/button
 Sort tab order inside a group
 Cancel/undo closing a group / tab
 Tab selectable within a group
