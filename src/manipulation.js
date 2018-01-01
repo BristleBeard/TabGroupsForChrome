@@ -48,9 +48,8 @@ function addTabToGroup(group, tab, disableTabCreation) {
     var tabListElement = '<li draggable="true" id="tab_id_' + tab.id + '" title="' + tab.url + '" >';
 
     tabListElement +=   '<div class="tabButtons" >';
-    tabListElement +=       '<input type="checkbox" class="tabCheckButton" />';
-    tabListElement +=       '<button type="button" class="tabGoButton" >-&rsaquo;</button>';
-    tabListElement +=       '<button type="button" class="tabCloseButton" >-</button>';
+    // tabListElement +=    '<input type="checkbox" class="tabCheckButton" />';
+    tabListElement +=       '<button type="button" class="tabCloseButton" id="close_tab_id_' + tab.id + '" title="Close Tab">x</button>';
     tabListElement +=   '</div>';
 
     if(tab.icon) {

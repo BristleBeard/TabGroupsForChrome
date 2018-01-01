@@ -62,6 +62,8 @@ header {
 .tabs_list li {
     clear: right;
     padding-left: 15px;
+    min-height: 25px;
+    line-height: 25px;
     margin-bottom: 1px;
 }
 
@@ -75,7 +77,11 @@ header {
 
 .tabButtons {
     float: right;
-    display: none;
+}
+
+.tabCloseButton {
+    padding: 1px 2px;
+    margin: 2px;
 }
 
 .group_move {

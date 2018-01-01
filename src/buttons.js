@@ -34,6 +34,11 @@ $(document).ready(function() {
         });
     });
 
+    elemGroupsList.on("click", ".tabCloseButton", function() {
+        removeTabFromGroup($(this).attr("id").replace("close_", ""));
+        saveGroups();
+    });
+
     elemGroupsList.on("blur", ".group_name", function() {
         group = getGroup(getGroupId($(this)));
         group.name = $(this).val();
