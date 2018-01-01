@@ -65,3 +65,15 @@ function getGroupByTab(tab_id) {
 
     console.error("No group contains tab: " + tab_id.toString());
 }
+
+function getTabFromActiveGroup(tab_id) {
+  tab_id = parseInt(tab_id.replace("tab_id_", ""));
+
+  for(var i = 0; i < activeGroup.tabs_list.length; i++) {
+      if(activeGroup.tabs_list[i].id == tab_id) {
+          return activeGroup.tabs_list[i];
+      }
+  }
+
+  console.error("Tab ID not found in active group: " + tab_id.toString());
+}

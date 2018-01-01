@@ -14,6 +14,10 @@ function closeTab(tab) {
     chrome.tabs.remove(tab.id_chrome);
 }
 
+function setActiveTab(tab) {
+    chrome.tabs.update(tab.id_chrome, { active: true });
+}
+
 function getNewTabUrl() {
     return 'chrome://newtab/';
 }

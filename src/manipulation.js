@@ -194,3 +194,27 @@ function removeGroup(group) {
     // Remove group from the list of groups
     groupsList.splice(groupsList.indexOf(group), 1);
 }
+
+function switchToTab(tabId) {
+    var group = getGroupByTab(tabId);
+
+    // If the tab is already in the active group, we can switch to it directly
+    if(group.id == activeGroup.id) {
+        var tab = getTabFromActiveGroup(tabId);
+        setActiveTab(tab);
+        return;
+    }
+
+    // Otherwise we need to change the active group to the one containing the tab first
+    setActiveGroup(group, function() {
+        // Use callback to avoid race condition where the current tab is closed before
+        // the new group has been opened (could potentially close the windows or terminate
+        // the script before complete execution)
+        // Save the groups to local storage
+        saveGroups(function() {
+            var tab = getTabFromActiveGroup(tabId);
+            setActiveTab(tab);
+            close();
+        });
+    });
+}
