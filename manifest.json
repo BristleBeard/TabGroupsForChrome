@@ -1,16 +1,16 @@
 {
   "manifest_version": 2,
 
-  "name" :"TabsFolder",
-  "version" :"1.1.0",
-  "description" :"Group your tabs into groups.",
-  "icons": { "16":  "icon16.png",
-	     "48":  "icon48.png",
-	     "128": "icon128.png" },
+  "name": "Tab Groups for Chrome™",
+  "version": "2.0.0",
+  "description": "Create and manage groups of tabs.",
+  "icons": {
+	"16":  "icon16.png",
+	"48":  "icon48.png",
+	"128": "icon128.png"
+  },
 
-  "author": {
-      "name": "Conchilicultor",
-      "email": "conchilicultor@gmail.com" },
+  "author": "pjh5000",
 
   "permissions": ["tabs", "storage"],
 
@@ -19,10 +19,10 @@
     "persistent": false
   },
 
-  "browser_action" :{
-      "default_icon" : "img/ba48.png",
-      "default_title": "Organise your tabs"
+  "browser_action": {
+    "default_icon":  "icon48.png",
+    "default_title": "View Tab Groups"
   },
 
-  "incognito": "split"
+  "incognito" : "split"
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TabFolder!</title>
+    <title>Tab Groups for Chrome&trade;</title>
     <meta charset="utf-8">
     <link rel="stylesheet" media="all" href="page.css" type="text/css" />
 
@@ -22,14 +22,23 @@
       <div id="help">
 	<img src="img/help.png" alt="help" height="20" />
 	<div id="help_hidden">
-	  <p>Some indication to use this extention :</p>
-	  <p>You just have to drag and drop links into groups.<br />
-	  I hope you will enjoy it.</p>
-	  <p>Sorry, I don't have the time to developp this extention anymore but you can still use the source code or fork the project at:<br /><a href="https://github.com/Conchylicultor/TabsFolder">https://github.com/Conchylicultor/TabsFolder</a></p>
+	  <p><strong>How to use this extension:</strong></p>
+	  <p>On this page you can create and remove tab groups, see the tabs within each group, and drag tabs
+      from one group to another group. Click on the 'Open Tab Group' button to open all the tabs in that group and
+      close the tabs in the previously open group.</p>
+      <p>This extension is maintained by pjh5000. The underlying source code can be found at: <a
+      href="https://github.com/pjh5000/TabGroupsForChrome" target="_blank">https://github.com/pjh5000/TabGroupsForChrome</a></p>
+	  <p>The code is based on the original <a href="https://chrome.google.com/webstore/detail/tabsfolder/pdfepgdcmifhbmldcofnkmnbabamjdnm" target="_blank">TabsFolder</a> extension by Conchilicultor, available from:
+      <a
+      href="https://github.com/Conchylicultor/TabsFolder" target="_blank">https://github.com/Conchylicultor/TabsFolder</a>.</p>
+      <p>Tab icons made by <a href="http://www.flaticon.com/authors/picol" title="Picol" target="_blank">Picol</a> from <a
+      href="http://www.flaticon.com" title="Flaticon" target="_blank">www.flaticon.com</a>, licensed by <a
+      href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>.</p>
+      <p>I hope you find this extension useful.</p>
 	</div>
       </div>
-      <button type="button" id="create_group" >Create a group</button>
-      <p>You can manage your tabs from this page :<span id="nb_tabs"></span></p>
+      <button type="button" id="create_group">Create Tab Group</button>
+      <p>Manage your tab groups from this page:<span id="nb_tabs"></span></p>
     </header>
     <div id="groups_list">
     </div>
