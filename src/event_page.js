@@ -1,4 +1,9 @@
-chrome.browserAction.onClicked.addListener(function(wtf) {
+/**
+ * Event page launched when tab groups browser action button clicked.
+ * Opens tab group manager page in new tab.
+ */
+
+chrome.browserAction.onClicked.addListener(function(tab) {
     // Open extension's manager.html page in new tab
     chrome.tabs.query({ 'url': chrome.extension.getURL('manager.html') }, function(tabs) {
         // Close any existing tabs which are currently displaying manager.html

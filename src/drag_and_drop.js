@@ -1,3 +1,7 @@
+/**
+ * Functions used to handle the drag & drop functionality, e.g. dragging tabs between tab groups
+ */
+
 function allowDrop(ev) {
     ev.preventDefault();
 }
