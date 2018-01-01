@@ -1,28 +1,33 @@
 {
-  "manifest_version": 2,
+    "manifest_version": 2,
 
-  "name": "Tab Groups for Chrome™",
-  "version": "2.0.0",
-  "description": "Create and manage groups of tabs.",
-  "icons": {
-	"16":  "icon16.png",
-	"48":  "icon48.png",
-	"128": "icon128.png"
-  },
+    "name": "Tab Groups for Chrome™",
+    "version": "2.0.0",
+    "description": "Create and manage groups of tabs.",
+    "icons": {
+        "16": "icon16.png",
+        "48": "icon48.png",
+        "128": "icon128.png"
+    },
 
-  "author": "pjh5000",
+    "author": "pjh5000",
 
-  "permissions": ["tabs", "storage"],
+    "permissions": [
+        "tabs",
+        "storage"
+    ],
 
-  "background": {
-    "scripts": ["src/event_page.js"],
-    "persistent": false
-  },
+    "background": {
+        "scripts": [
+            "src/event_page.js"
+        ],
+        "persistent": false
+    },
 
-  "browser_action": {
-    "default_icon":  "icon48.png",
-    "default_title": "View Tab Groups"
-  },
+    "browser_action": {
+        "default_icon": "icon48.png",
+        "default_title": "View Tab Groups"
+    },
 
-  "incognito" : "split"
+    "incognito": "split"
 }
