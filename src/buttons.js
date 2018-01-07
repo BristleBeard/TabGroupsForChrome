@@ -34,6 +34,12 @@ $(document).ready(function() {
         });
     });
 
+    elemGroupsList.on("click", ".group_new_tab", function() {
+        createNewEmptyTab(getGroup(getGroupId($(this))));
+        // Save the groups to local storage
+        saveGroups();
+    });
+
     elemGroupsList.on("click", ".tabs_list li", function() {
         switchToTab($(this).attr("id"));
     });

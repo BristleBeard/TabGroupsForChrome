@@ -19,6 +19,7 @@ function createGroup() {
                 '<input type="text" class="group_name" value="' + new_group.name + '" >' +
                 '<button type="button" class="group_set_active" >Open Tab Group</button>' +
                 '<button type="button" class="group_remove" title="Close Group">X</button>' +
+                '<button type="button" class="group_new_tab" >New Tab</button>' +
                 '<button type="button" class="group_move" draggable="true" >M</button>' +
             '</p>' +
             '<ul class="tabs_list">' +
