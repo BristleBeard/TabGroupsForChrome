@@ -89,6 +89,10 @@ header {
     display: none;
 }
 
+.group_name {
+    margin-right: 10px;
+}
+
 .group_new_tab,
 .group_remove {
     float: right;
